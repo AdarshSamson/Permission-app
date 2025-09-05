@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "permission-app",
-    "slug": "permission-app",
+    "slug": "login-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
