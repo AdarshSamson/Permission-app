@@ -1,0 +1,37 @@
+[
+  {
+    "id": "camera",
+    "title": "Camera",
+    "description": "To instantly scan paper receipts without manual uploads",
+    "icon": "camera-alt",
+    "iconColor": "#3B82F6",
+    "checkMethod": "getCameraPermissionsAsync",
+    "requestMethod": "requestCameraPermissionsAsync"
+  },
+  {
+    "id": "photos",
+    "title": "Photos",
+    "description": "To detect and organize receipts already saved in your phone's gallery",
+    "icon": "photo-library",
+    "iconColor": "#10B981",
+    "checkMethod": "getPermissionsAsync",
+    "requestMethod": "requestPermissionsAsync"
+  },
+  {
+    "id": "location",
+    "title": "Location",
+    "description": "To log where transactions happen and auto-tag trips or visits",
+    "icon": "location-on",
+    "iconColor": "#06B6D4",
+    "checkMethod": "getForegroundPermissionsAsync",
+    "requestMethod": "requestForegroundPermissionsAsync"
+  },
+  {
+    "id": "messages",
+    "title": "Messages",
+    "description": "To auto-detect receipts and confirmations sent via text — no searching required",
+    "icon": "message",
+    "iconColor": "#3B82F6",
+    "isSpecial": true
+  }
+]

@@ -1,4 +1,3 @@
-import { EvilIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
   View,
@@ -8,15 +7,12 @@ import {
   FlatList,
   StyleSheet,
 } from "react-native";
+import { TextInput } from "react-native-paper";
+import { EvilIcons } from "@expo/vector-icons";
 
-const CustomDropdown = ({
-  label,
-  placeholder,
-  data,
-  onSelect,
-  selectedValue,
-  style,
-}) => {
+const MAX_CHARS = 30;
+
+const CustomDropdown = ({ label, data, onSelect, selectedValue }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(selectedValue || "");
 
@@ -26,40 +22,50 @@ const CustomDropdown = ({
     setIsOpen(false);
   };
 
+
+  const getDisplayText = () => {
+    if (!selected) return "";
+    return selected.length > MAX_CHARS
+      ? selected.substring(0, MAX_CHARS) + "..."
+      : selected;
+  };
+
   return (
-    <View style={[styles.container, style]}>
-      <Text style={styles.label}>{label}</Text>
-      <TouchableOpacity
-        style={styles.dropdown}
-        onPress={() => setIsOpen(true)}
-      >
-        <View style={styles.inputContainer}>
-          <Text
-            style={[
-              styles.selectedText,
-              !selected && styles.placeholder,
-            ]}
-          >
-            {selected || placeholder}
-          </Text>
-        </View>
-        <EvilIcons
-          name={isOpen ? "chevron-up" : "chevron-down"}
-          size={24}
-          color="#9CA3AF"
+    <View style={{ marginVertical: 10 }}>
+
+      <TouchableOpacity onPress={() => setIsOpen(true)} activeOpacity={0.9}>
+        <TextInput
+          label={label}
+          value={getDisplayText()}
+          underlineColor="transparent"
+          editable={false}
+          mode="outlined"
+          style={styles.input}
+          right={
+            <TextInput.Icon
+              icon={() => (
+                <EvilIcons
+                  name={isOpen ? "chevron-up" : "chevron-down"}
+                  size={24}
+                  color="#9CA3AF"
+                />
+              )}
+            />
+          }
         />
       </TouchableOpacity>
 
+      {/* Dropdown Modal */}
       <Modal
         visible={isOpen}
-        transparent={true}
+        transparent
         animationType="fade"
         onRequestClose={() => setIsOpen(false)}
       >
         <TouchableOpacity
           style={styles.overlay}
-          onPress={() => setIsOpen(false)}
           activeOpacity={1}
+          onPressOut={() => setIsOpen(false)}
         >
           <View style={styles.modalContent}>
             <FlatList
@@ -67,10 +73,22 @@ const CustomDropdown = ({
               keyExtractor={(item) => item.value.toString()}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  style={styles.option}
+                  style={[
+                    styles.option,
+                    selected === item.label && styles.selectedOption,
+                  ]}
                   onPress={() => handleSelect(item)}
                 >
-                  <Text style={styles.optionText}>{item.label}</Text>
+                  <Text
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                    style={styles.optionText}
+                  >
+                    {item.label}
+                  </Text>
+                  {selected === item.label && (
+                    <EvilIcons name="check" size={20} color="#3B82F6" />
+                  )}
                 </TouchableOpacity>
               )}
             />
@@ -82,56 +100,35 @@ const CustomDropdown = ({
 };
 
 const styles = StyleSheet.create({
-  container: { 
-    marginVertical: 6,
-  },
-  label: {
-    fontSize: 14,
-    color: "#6B7280",
-    marginBottom: 1,
-    fontWeight: "400",
-  },
-  dropdown: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    backgroundColor: "#FFFFFF",
-    minHeight: 56,
-  },
-  inputContainer: { 
-    flex: 1,
-  },
-  selectedText: { 
-    fontSize: 16, 
-    color: "#111827",
+  input: {
+    borderRadius: 22,
+    backgroundColor: "#fff",
   },
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    backgroundColor: "rgba(0,0,0,0.3)",
     justifyContent: "center",
     paddingHorizontal: 20,
+
   },
   modalContent: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
+    backgroundColor: "#fff",
+    borderRadius: 8,
     maxHeight: 300,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   option: {
-    padding: 16,
+    padding: 14,
     borderBottomWidth: 1,
-    borderBottomColor: "#F3F4F6",
+    borderBottomColor: "#eee",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
-  optionText: { 
-    fontSize: 16, 
+  selectedOption: {
+    backgroundColor: "#F9FAFB",
+  },
+  optionText: {
+    fontSize: 16,
     color: "#111827",
   },
 });

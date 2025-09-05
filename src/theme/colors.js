@@ -1,7 +1,7 @@
 
 export default {
   primary: "#3a67edff",   
-  secondary: "#c3a6d743", 
+  secondary: "#ac92bd2e", 
   accent: "#F59E0B",    
   error: "#EF4444",     
   success: "#22C55E",   

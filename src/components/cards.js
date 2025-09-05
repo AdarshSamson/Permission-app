@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import colors from '../theme/colors';
 
-const Cards = ({ 
-  icon, 
-  title, 
-  subtitle, 
-  onPress, 
-  style 
+const Cards = ({
+  icon,
+  title,
+  subtitle,
+  onPress,
+  style
 }) => {
   return (
     <View style={[styles.card, style]}>
@@ -24,49 +25,67 @@ const Cards = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 20,
+    backgroundColor: colors.background,
+    borderRadius: 16,
+    padding: 15,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 2,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 4,
     flex: 1,
     marginHorizontal: 8,
+    justifyContent: 'space-between',
   },
   iconContainer: {
-    marginBottom: 16,
+    marginBottom: 4,
+    marginTop: 1,
+
   },
   title: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
-    color: '#111827',
+    color: '#3f444eff',
     textAlign: 'center',
-    marginBottom: 4,
+    lineHeight: 15,
+    marginBottom: 5,
+    marginHorizontal: -8,
   },
   subtitle: {
-    fontSize: 14,
-    color: '#6B7280',
+    fontSize: 13,
+    color: '#9CA3AF',
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: 12,
   },
   connectButton: {
-    backgroundColor: '#7C3AED',
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    backgroundColor: colors.primary,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'absolute',
+    bottom: -14,
+    alignSelf: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 6.08,
+    shadowRadius: 18,
+    elevation: 6,
+    borderWidth: 1,
+    borderColor: '#FFFFFF',
   },
   connectButtonText: {
     color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 16,
+    fontWeight: '400',
   },
 });
 

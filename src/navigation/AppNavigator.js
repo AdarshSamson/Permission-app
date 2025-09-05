@@ -13,10 +13,10 @@ export default function AppNavigator() {
         header: (props) => <CustomHeader {...props} />, //  custom header
       }}
     >
-  <Stack.Screen 
-        name="MainTabs" 
-        component={TopTabs} 
-        options={{ title: "Profile" }} 
+      <Stack.Screen
+        name="MainTabs"
+        component={TopTabs}
+        options={{ title: "Profile" }}
       />
     </Stack.Navigator>
   );

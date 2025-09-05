@@ -1,0 +1,22 @@
+{
+  "goals": [
+    { "label": "Separate personal and business expenses", "value": 1 },
+    { "label": "Track all business transactions", "value": 2 },
+    { "label": "Manage multiple income sources", "value": 3 },
+    { "label": "Organize tax documents", "value": 4 }
+  ],
+  "workTypes": [
+    { "label": "Freelancer / Independent Contractor", "value": 1 },
+    { "label": "Small Business Owner", "value": 2 },
+    { "label": "Employee", "value": 3 },
+    { "label": "Consultant", "value": 4 }
+  ],
+  "sectors": [
+    { "label": "Real Estate (Agents, Property Management)", "value": 1 },
+    { "label": "Technology & Software", "value": 2 },
+    { "label": "Healthcare & Medical", "value": 3 },
+    { "label": "Marketing & Advertising", "value": 4 },
+    { "label": "Finance & Accounting", "value": 5 },
+    { "label": "Education & Training", "value": 6 }
+  ]
+}

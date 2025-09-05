@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+import { EvilIcons } from '@expo/vector-icons';
 import Cards from '../../components/cards';
+import Button from '../../components/Button';
+import GmailIcon from '../../../assets/gmailIcon.png';
+import OutlookIcon from '../../../assets/outlookIcon.png';
 
 export default function EmailScreen() {
   const handleGoogleConnect = () => {
@@ -12,25 +15,6 @@ export default function EmailScreen() {
     console.log('Connect Microsoft 365');
   };
 
-  const handleContinue = () => {
-    console.log('Continue');
-  };
-
-  // Gmail icon component
-  const GmailIcon = () => (
-    <MaterialIcons name="email" size={32} color="#EA4335" />
-  );
-
-  // Outlook icon component  
-  const OutlookIcon = () => (
-    <MaterialIcons name="email" size={32} color="#0078D4" />
-  );
-
-  // Shield icon component
-  const ShieldIcon = () => (
-    <MaterialIcons name="security" size={48} color="#9CA3AF" />
-  );
-
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text style={styles.description}>
@@ -39,33 +23,31 @@ export default function EmailScreen() {
 
       <View style={styles.cardsContainer}>
         <Cards
-          icon={<GmailIcon />}
+          icon={<Image source={GmailIcon} style={styles.Icon} />}
           title="Connect Google Workspace (Gmail)"
-          subtitle="Mail • Calendar"
+          subtitle="Mail + Calendar"
           onPress={handleGoogleConnect}
           style={styles.card}
         />
-        
+
         <Cards
-          icon={<OutlookIcon />}
+          icon={<Image source={OutlookIcon} style={styles.Icon} />}
           title="Connect Microsoft 365 (Outlook)"
-          subtitle="Mail • Calendar"
+          subtitle="Mail + Calendar"
           onPress={handleMicrosoftConnect}
           style={styles.card}
         />
       </View>
 
       <View style={styles.securitySection}>
-        <ShieldIcon />
+        <EvilIcons name="lock" size={38} color="#2c6fe2ff" />
         <Text style={styles.securityText}>
           We'll only scan for receipts - not your personal emails.{'\n'}
           Your credentials are never shared with us.
         </Text>
       </View>
 
-      <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-        <Text style={styles.continueButtonText}>Continue</Text>
-      </TouchableOpacity>
+      <Button text='Continue' type='seconday' />
     </ScrollView>
   );
 }
@@ -74,45 +56,52 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9FAFB',
+    paddingTop: 30,
     padding: 20,
   },
   description: {
-    fontSize: 16,
-    color: '#6B7280',
-    lineHeight: 22,
+    fontSize: 14,
+    color: '#808388ff',
+    lineHeight: 20,
+    fontWeight: '600',
     marginBottom: 32,
     textAlign: 'left',
   },
   cardsContainer: {
     flexDirection: 'row',
-    marginBottom: 80,
-    marginHorizontal: -8,
+    marginBottom: 190,
+    marginHorizontal: -10,
   },
   card: {
-    minHeight: 180,
+    minHeight: 120,
   },
   securitySection: {
     alignItems: 'center',
-    marginBottom: 40,
-    paddingHorizontal: 20,
+    marginBottom: 55,
+    paddingHorizontal: 1,
   },
   securityText: {
-    fontSize: 14,
-    color: '#9CA3AF',
+    fontSize: 12,
+    color: '#7d838eff',
     textAlign: 'center',
-    lineHeight: 20,
-    marginTop: 16,
+    lineHeight: 16,
+    marginTop: 12,
+    fontWeight: '500',
   },
-  continueButton: {
-    backgroundColor: '#E5E7EB',
-    borderRadius: 25,
-    paddingVertical: 16,
+  Icon: {
+    width: 38,
+    height: 38,
+    backgroundColor: '#ffffffff',
+    borderRadius: 8,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#edededff',
   },
-  continueButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#9CA3AF',
+  gmailText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: '700',
   },
+
 });

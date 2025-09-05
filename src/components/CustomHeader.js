@@ -6,7 +6,22 @@ import colors from "../theme/colors";
 
 const CustomHeader = ({ navigation, route, options }) => {
 
-  const screenName = options?.title || route?.name ;
+  const getActiveRouteName = () => {
+    const state = navigation.getState();
+    if (state?.routes && state.routes.length > 0) {
+      const activeRoute = state.routes[state.index];
+      if (activeRoute.state?.routes && activeRoute.state.routes.length > 0) {
+        const tabRoute = activeRoute.state.routes[activeRoute.state.index];
+        return tabRoute.name;
+      }
+
+      return activeRoute.name;
+    }
+
+    return options?.title || route?.name || "Profile";
+  };
+
+  const screenName = getActiveRouteName();
 
 
   const handleBackPress = () => {
@@ -56,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
     flex: 1,
-    marginHorizontal: 8, 
+    marginHorizontal: 8,
   },
   rightIcons: {
     flexDirection: "row",
